@@ -1,0 +1,60 @@
+import numpy as np
+import cv2
+import matplotlib.pyplot as plt
+
+img = cv2.imread('../datasets/pemandangan.jpg', 0)
+kernel = np.ones((4, 4), np.float32)/16
+dst_blur = cv2.filter2D(img, -1, kernel)
+
+kernel_v1 = np.array([[0, -0.5, 0], [-0.5, 0, 0.5], [0, 0.5, 0]])
+kernel_h1 = np.transpose(kernel_v1)
+dst_h1 = cv2.filter2D(img, -1, kernel_h1)
+dst_v1 = cv2.filter2D(img, -1, kernel_v1)
+dst_edge1 = cv2.add(dst_v1, dst_h1)
+img_sharp1 = cv2.add(img, dst_edge1)
+img_inverse1 = 255-dst_edge1
+
+kernel_v2 = np.array([[0, -0.5, 0], [-0.5, 1, 0.5], [0, 0.5, 0]])
+kernel_h2 = np.transpose(kernel_v1)
+dst_h2 = cv2.filter2D(img, -1, kernel_h2)
+dst_v2 = cv2.filter2D(img, -1, kernel_v2)
+dst_edge2 = cv2.add(dst_v2, dst_h2)
+img_sharp2 = cv2.add(img, dst_edge2)
+img_inverse2 = 255-dst_edge2
+
+plt.subplot(241)
+plt.imshow(img, cmap='gray', vmin='0', vmax='255')
+plt.title("Original")
+plt.xticks([0]), plt.yticks([0])
+plt.subplot(242)
+plt.imshow(dst_blur, cmap='gray', vmin='0', vmax='255')
+plt.title("Filtered Blur")
+plt.xticks([0]), plt.yticks([0])
+plt.subplot(243)
+plt.imshow(dst_edge1, cmap='gray', vmin='0', vmax='255')
+plt.title("Filtered Edge 1")
+plt.xticks([0]), plt.yticks([0])
+plt.subplot(244)
+plt.imshow(img_sharp1, cmap='gray', vmin='0', vmax='255')
+plt.title("Filtered Sharpeness 1")
+plt.xticks([0]), plt.yticks([0])
+plt.subplot(245)
+plt.imshow(img_inverse1, cmap='gray', vmin='0', vmax='255')
+plt.title("Filtered Sketsa 1")
+plt.xticks([0]), plt.yticks([0])
+plt.subplot(246)
+plt.imshow(dst_edge2, cmap='gray', vmin='0', vmax='255')
+plt.title("Filtered Edge 2")
+plt.xticks([0]), plt.yticks([0])
+plt.subplot(247)
+plt.imshow(img_sharp2, cmap='gray', vmin='0', vmax='255')
+plt.title("Filtered Sharpeness 2")
+plt.xticks([0]), plt.yticks([0])
+plt.subplot(248)
+plt.imshow(img_inverse2, cmap='gray', vmin='0', vmax='255')
+plt.title("Filtered Sketsa 2")
+plt.xticks([0]), plt.yticks([0])
+
+plt.show()
+cv2.waitKey(0)
+cv2.destroyAllWindows()
