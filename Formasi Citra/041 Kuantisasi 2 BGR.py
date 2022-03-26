@@ -15,7 +15,7 @@ for i in range(height):
             if img[i, j][k] < 128:
                 gray = 0
             else:
-                gray = 255
+                gray = 192
             new_img[i, j][k] = np.uint8(gray)
 
 titles = [
@@ -27,7 +27,7 @@ images = [
 ]
 
 for i in xrange(2):
-    plt.subplot(1, 2, i + 1), plt.imshow(images[i], cmap='gray')
+    plt.subplot(1, 2, i + 1), plt.imshow(images[i], cmap='gray', vmin='0', vmax='255')
     plt.title(titles[i])
     plt.xticks([]), plt.yticks([])
 
