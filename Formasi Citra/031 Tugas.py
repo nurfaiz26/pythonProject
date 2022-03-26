@@ -9,10 +9,8 @@ img3 = mpimg.imread("../datasets/tulip.jpg")
 img4 = mpimg.imread("../datasets/koala.jpg")
 
 def sepia(img_src):
-    b = img_src[:, :, 0]
-    g = img_src[:, :, 1]
-    r = img_src[:, :, 2]
-    rnew = (b + g + r)/3
+    b, g, r = cv2.split(img_src)
+    rnew = (b + g + r) / 3
     img_src[:, :, 0] = 2 * rnew
     img_src[:, :, 1] = 1.8 * rnew
     img_src[:, :, 2] = rnew

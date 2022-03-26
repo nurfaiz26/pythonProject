@@ -17,7 +17,7 @@ img_gray3 = np.maximum(img_RG2, B)
 
 titles = [
     'Original Image',
-    'CIluminasi Rata Rata',
+    'Iluminasi Rata Rata',
     'Iluminasi Minimum',
     'Iluminasi Maximum'
 ]

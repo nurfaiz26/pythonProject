@@ -15,7 +15,7 @@ def sepia(src_image):
     sepia[:, :, 2] *= normalized_gray  # R
     return np.array(sepia, np.uint8)
 
-image = cv2.imread('../datasets/penguin.png')
+image = cv2.imread('../datasets/penguin.jpg')
 image2 = sepia(image)
 cv2.imshow('', image2)
 cv2.waitKey()
